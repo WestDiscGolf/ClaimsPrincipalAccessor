@@ -1,0 +1,36 @@
+﻿@page "/"
+@inject HttpClient Http
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Index</PageTitle>
+
+<h1>@_message.Value</h1>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+
+@code {
+
+    private Message _message = new() { Value = "Not logged in." };
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            if (authState.User.Identity?.IsAuthenticated == true)
+            {
+                _message = await Http.GetFromJsonAsync<Message>("/api/getwelcome");
+            }
+        }
+        catch (HttpRequestException e) when (e.StatusCode ==  System.Net.HttpStatusCode.Unauthorized)
+        {
+            _message.Value = "An error occurred.";
+        }
+    }
+
+    public class Message
+    {
+        public string Value { get; set; }
+    }
+}
