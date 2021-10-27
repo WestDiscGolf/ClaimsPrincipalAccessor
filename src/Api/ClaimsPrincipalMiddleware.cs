@@ -18,7 +18,7 @@ namespace Api
             (Type featureType, object featureInstance) = context.Features.SingleOrDefault(x => x.Key.Name == "IFunctionBindingsFeature");
 
             // find the input binding of the function which has been invoked and then find the associated parameter of the function for the data we want
-            var inputData = featureType.GetProperties().Single(p => p.Name == "InputData").GetValue(featureInstance) as IReadOnlyDictionary<string, object>;
+            var inputData = featureType.GetProperties().SingleOrDefault(p => p.Name == "InputData")?.GetValue(featureInstance) as IReadOnlyDictionary<string, object>;
             var requestData = inputData?.Values.SingleOrDefault(obj => obj is HttpRequestData) as HttpRequestData;
 
             if (requestData?.ParsePrincipal() is ClaimsPrincipal principal)
