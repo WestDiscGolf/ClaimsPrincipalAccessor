@@ -17,6 +17,6 @@ You will need the Azure Static Web App cli to be installed. This can be done by 
 
 `swa start http://localhost:5118 --run "cd .\src\client && dotnet watch run" --api .\src\api`
 
-This will start the Azure Static Web App cli emulator running the blazor client app under the 5118 post and the Azure Functions application under "api".
+This will start the Azure Static Web App cli emulator running the blazor client app under port 5118 and the Azure Functions application under "api".
 
 4. Now open browser and navigate to http://localhost:4280
