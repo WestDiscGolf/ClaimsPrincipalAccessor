@@ -15,16 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: Setup .NET Core SDK 6.0.100-rc.2
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 6.0.100-rc.2.21505.57
-
+    
       - name: Setup .NET Core SDK 3.1.414
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.414
     
+      - name: Setup .NET Core SDK 6.0.100-rc.2
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.100-rc.2.21505.57
+          
       - uses: actions/checkout@v2
         with:
           submodules: true
